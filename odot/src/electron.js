@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+const fs = require("fs")
 require("dotenv").config();
 const https = require('https');
 //const axios = require("axios"); // Use axios for API requests
@@ -27,6 +28,21 @@ function createWindow() {
     win.webContents.openDevTools();
   }
 }
+
+function createNativeFile() {
+    const path = "~/Library/Application Support/Google/Chrome/NativeMessagingHosts/com.hackclub.odot.json"
+    if (!fs.existsSync(path)) {
+        const jsFile = {
+  "name": "com.hackclub.odot",
+  "description": "Odot",
+  "path": __dirname,
+  "type": "stdio",
+  "allowed_origins": ["chrome-extension://knldjmfmopnpolahpmmgbagdohdnhkik/"]
+}
+        fs.writeFileSync(path, JSON.stringify(jsFile))
+    }
+}
+
 
 // Create window when app is ready
 app.whenReady().then(createWindow);
