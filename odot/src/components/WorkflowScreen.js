@@ -6,7 +6,7 @@ function WorkflowScreen() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
+    <div className="body">
       <h1>{option}</h1>
       <p>This is the workflow screen for {option}.</p>
       <button onClick={() => navigate("/onboarding")} style={{ marginTop: "20px" }}>

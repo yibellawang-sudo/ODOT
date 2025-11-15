@@ -3,26 +3,29 @@ import { useNavigate } from "react-router-dom";
 
 function Onboarding() {
   const navigate = useNavigate();
-  const options = ["Option 1", "Option 2", "Option 3"];
+  const options = ["screentime usage", "notes & goals", "todos"];
 
   return (
-    <div style={{ display: "flex", padding: "50px" }}>
-      <div style={{ width: "200px", marginRight: "50px" }}>
-        <h2>Pick an Option</h2>
+    <div className="onboard-body">
+      <p onClick={() => navigate("/")} className="navButton">
+        ←
+      </p>
+      
+        <h2>odot</h2>
+        <div className="buttonDiv">
         {options.map((opt) => (
           <button
             key={opt}
-            style={{ display: "block", margin: "20px 0", padding: "10px" }}
+            className = "large-button"
             onClick={() => navigate(`/workflow/${opt}`)}
           >
             {opt}
           </button>
         ))}
+        </div>
       </div>
-      <div style={{ flex: 1, textAlign: "center" }}>
-        <p>Choose an option from the sidebar</p>
-      </div>
-    </div>
+     
+   
   );
 }
 
