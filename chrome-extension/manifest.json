@@ -1,16 +1,17 @@
 {
     "manifest_version": 3,
     "name": "ODOT",
-    "version": "1.0.0",
+    "version": "4.0.0",
     "description": "Tracks your screen time and roasts you",
     "permissions": [
         "tabs",
         "storage",
         "alarms",
-        "notifications"
+        "notifications",
+        "nativeMessaging"
     ],
     "host_permissions": [
-        "<all_urls"
+        "<all_urls>"
     ],
     "background": {
         "service_worker": "background.js"
