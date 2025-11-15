@@ -2,7 +2,7 @@ const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 const fs = require("fs")
-require("dotenv").config();
+require('dotenv').config();
 const https = require('https');
 //const axios = require("axios"); // Use axios for API requests
 
@@ -24,9 +24,9 @@ function createWindow() {
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
 
-  if (isDev) {
+
     win.webContents.openDevTools();
-  }
+  
 }
 
 function createNativeFile() {
@@ -60,24 +60,27 @@ app.on("activate", () => {
   }
 });
 
-ipcMain.handle('fetch-api', async (event, url) => {
-  return new Promise((resolve, reject) => {
-    https.get(url, (res) => {
-      let data = '';
 
-      res.on('data', (chunk) => {
-        data += chunk;
-      });
 
-      res.on('end', () => {
-        try {
-          resolve(JSON.parse(data));
-        } catch (err) {
-          resolve(data); // if response is not JSON
-        }
-      });
-    }).on('error', (err) => {
-      resolve({ error: err.message });
-    });
+
+
+
+
+ipcMain.handle("fetch-api", async (event) => {
+
+  const apiKey = process.env.API_KEY
+
+  const res = await fetch("https://ai.hackclub.com/proxy/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      "model": "qwen/qwen3-32b",
+      "messages": [{ "role": "user", "content": "hello" }]
+    })
   });
+
+  return res.json();
 });

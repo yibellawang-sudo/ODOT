@@ -5,7 +5,8 @@ function App() {
 
   useEffect(() => {
     async function getData() {
-      const result = await window.electronAPI.fetchAPI('https://jsonplaceholder.typicode.com/todos/1');
+      const result = await window.electronAPI.fetchAPI('https://ai.hackclub.com/proxy/v1/chat/completion');
+      console.log(result)
       setData(result);
     }
     getData();
@@ -14,7 +15,7 @@ function App() {
   return (
     <div>
       <h1>Electron + React API Example</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
+     {JSON.stringify(data, null, 2)}
     </div>
   );
 }
