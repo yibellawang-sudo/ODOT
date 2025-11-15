@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function StartScreen() {
   const navigate = useNavigate();
+  console.log("hello")
 
   return (
     <div style={{ fontSize: "60px", textAlign: "center", marginTop: "15px" }}>
