@@ -1,0 +1,111 @@
+body {
+    width: 380px;
+    padding: 0;
+    margin: 0;
+    background: black;
+    color: white;
+}
+
+.header {
+    background: black;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0 0 8px 0;
+    font-size: 22px;
+}
+
+.status {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.status.inactive {
+    color: #e94560;
+}
+
+.content {
+    padding: 20px;
+}
+
+.total {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.total-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 20px;
+}
+
+.current-site {
+    background: black;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.sites-list {
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: black;
+    margin-bottom: 8px;
+    border-radius: 8px;
+}
+
+.site-name {
+    font-weight: 500;
+    font-size: 14px;
+    flex: 1;
+}
+
+.site-time {
+    font-weight: bold;
+    font-size: 15px;
+    margin-left: 12px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+.empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.empty-icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.sites-header {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
