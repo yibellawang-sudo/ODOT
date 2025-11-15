@@ -84,3 +84,10 @@ ipcMain.handle("fetch-api", async (event) => {
 
   return res.json();
 });
+
+
+ipcMain.handle("readInFile", async (event) => {
+  //const filePath = path.join(__dirname, "../data.json");
+ //const data = fs.readFileSync(path)
+return "hello"
+})

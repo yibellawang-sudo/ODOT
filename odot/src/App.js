@@ -4,6 +4,7 @@ import StartScreen from "./components/StartScreen";
 import Onboarding from "./components/Onboarding";
 import WorkflowScreen from "./components/WorkflowScreen";
 import "./App.css";
+import ScreentimeMetrics from './components/ScreentimeMetrics';
 function App() {
   /*
   const [data, setData] = useState(null);
@@ -30,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<StartScreen />} />
           <Route path="/onboarding" element={<Onboarding />} />
+          <Route path="/ScreentimeMetrics" element={<ScreentimeMetrics />} />
           <Route path="/workflow/:option" element={<WorkflowScreen />} />
         </Routes>
       </Router>

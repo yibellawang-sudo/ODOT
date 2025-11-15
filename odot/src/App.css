@@ -75,14 +75,13 @@ cursor: pointer;
 
 .large-button {
   margin: 0 0 5% 0;
-display: flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   height: 25%;
   width: 70%;
   background-color: #abff4f;
   text-align: center;
- /* padding: 50px 100px;*/
   border: none;
   border-radius: 5px;
 }
