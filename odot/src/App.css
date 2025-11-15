@@ -14,19 +14,79 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-size: 60px;
 }
 
 .App-link {
   color: #61dafb;
 }
+
+
+.navButton {
+cursor: pointer;
+}
+
+.body {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+
+
+.onboard-body {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 5%;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.buttonDiv {
+  width: 90%;
+  display: flex;
+  height: 80%;
+  flex-direction: column;
+
+  
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 7%;
+  width: 40%;
+  background-color: #abff4f;
+  text-align: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  
+}
+
+.large-button {
+  margin: 0 0 5% 0;
+display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25%;
+  width: 70%;
+  background-color: #abff4f;
+  text-align: center;
+ /* padding: 50px 100px;*/
+  border: none;
+  border-radius: 5px;
+}
+
 
 @keyframes App-logo-spin {
   from {

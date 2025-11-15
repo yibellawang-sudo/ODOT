@@ -224,6 +224,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
 });
 
+
+
 // AI Analysis function
 async function analyzeWithAI(sites) {
     try {
