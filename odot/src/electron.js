@@ -6,23 +6,23 @@ require('dotenv').config();
 const https = require('https');
 //const axios = require("axios"); // Use axios for API requests
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      nodeIntegration: false, // Must be false for security
-      contextIsolation: true, // Must be true to use preload safely
-      preload: path.join(__dirname, "preload.js"), // preload script
-    },
-  });
+  function createWindow() {
+    const win = new BrowserWindow({
+      width: 1000,
+      height: 700,
+      webPreferences: {
+        nodeIntegration: false,
+        contextIsolation: true,
+        preload: path.join(__dirname, "preload.js"),
+      },
+    });
 
-  // Load React
-  win.loadURL(
-    isDev
-      ? "http://localhost:3000"
-      : `file://${path.join(__dirname, "../build/index.html")}`
-  );
+    // Load React
+    win.loadURL(
+      isDev
+        ? "http://localhost:3000"
+        : `file://${path.join(__dirname, "../build/index.html")}`
+    );
 
 
     win.webContents.openDevTools();
@@ -44,21 +44,23 @@ function createNativeFile() {
 }
 
 
-// Create window when app is ready
-app.whenReady().then(createWindow);
+  // Create window when app is ready
+  app.whenReady().then(() => { 
+    createWindow(); 
+  });
 
-// Quit when all windows are closed
-app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") {
-    app.quit();
-  }
-})
+  // Quit when all windows are closed
+  app.on("window-all-closed", () => {
+    if (process.platform !== "darwin") {
+      app.quit();
+    }
+  });
 
-app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow();
-  }
-});
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 
 
 

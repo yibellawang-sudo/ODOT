@@ -1,0 +1,9 @@
+{
+  "name": "com.hackclub.odot",
+  "description": "ODOT Native Messaging Host",
+  "path": "/Users/bwang/Desktop/Code/ODOT/odot/nativeHost.js",
+  "type": "stdio",
+  "allowed_origins": [
+    "chrome-extension://cbbakhncflnomhbkgahgfmohpcbfhlhj/"
+  ]
+}
