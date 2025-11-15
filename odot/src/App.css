@@ -23,6 +23,9 @@
   color: #61dafb;
 }
 
+.left-header{
+  text-align: left;
+}
 
 .navButton {
 cursor: pointer;
@@ -86,6 +89,29 @@ cursor: pointer;
   border-radius: 5px;
 }
 
+.timeRow {
+  background-color: #abff4f;
+  width: 80%;
+  margin: 0 0 5% 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 5px;
+}
+
+.screentime-viewer {
+display: flex;
+flex-direction: column;
+justify-content: left;
+align-items: flex-start;
+padding: 2%;
+}
+
+.timeRowDiv {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
 
 @keyframes App-logo-spin {
   from {

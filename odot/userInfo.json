@@ -1,0 +1,18 @@
+{
+    "general": {
+        "goals": ["want to max 5 hrs on screen time", "want to look cooler"],
+        "traits": ["lazy", "boring"]
+    },
+    "journal": [
+        {
+            "date": 102030,
+            "summary": "blah blah blah"
+            
+        },
+        {
+            "date": 102031,
+            "summary": "blah boo bah"
+            
+        }
+    ]
+}

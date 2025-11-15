@@ -1,7 +1,17 @@
-{
-    "google.com": 
-    {"date": 1763219720, "seconds": 5000},
-    "youtube.com": 
-     {"date": 1763219720, "seconds": 5000},
-    "instagram.com": {"date": 1763219720, "seconds": 5000}
-}
+[
+  {
+    "name": "google.com",
+    "date": 1763219720,
+    "seconds": 5000
+  },
+  {
+    "name": "youtube.com",
+    "date": 1763219720,
+    "seconds": 5000
+  },
+  {
+    "name": "instagram.com",
+    "date": 1763219720,
+    "seconds": 5000
+  }
+]

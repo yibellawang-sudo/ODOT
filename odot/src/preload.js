@@ -7,6 +7,5 @@ contextBridge.exposeInMainWorld('electronAPI', {
   
   analyzeWithAI: (sites) => ipcRenderer.invoke('analyze-with-ai', sites),
   
-  // Legacy fetch API (keep for compatibility)
-  fetchAPI: (url) => ipcRenderer.invoke('fetch-api', url)
+  
 });
