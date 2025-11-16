@@ -234,6 +234,7 @@ function fallbackClassification(sites) {
 // Fetch API
 ipcMain.handle("fetch-api", async (event, message) => {
   const apiKey = process.env.API_KEY;
+  console.log(message)
   const res = await fetch("https://ai.hackclub.com/proxy/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -241,7 +242,7 @@ ipcMain.handle("fetch-api", async (event, message) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "model": "qwen/qwen3-32b",
+      "model": "openai/gpt-5-mini",
       "messages": [{ "role": "user", "content": message }]
     })
   });
@@ -253,11 +254,11 @@ ipcMain.handle("fetch-api", async (event, message) => {
 ipcMain.handle("readInFile", async (event, type) => {
   let filepath;
   if (type == 'userinfo') {
-    filepath = path.join(__dirname, "../userInfo.json");
+    filepath = path.join(os.homedir(), '.odot-user-data.json')
+    console.log(filepath)
   } else {
-    filepath = path.join(__dirname, "../data.json");
+    filepath = path.join(os.homedir(), '.odot-tracker-data.json');
   }
   const data = fs.readFileSync(filepath);
-  
   return data;
-});
+})
