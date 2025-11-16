@@ -16,14 +16,13 @@ function StartScreen() {
         <img 
           src={logoImg} 
           alt="odot logo" 
-          style={{ height: "60px", width: "auto" }} 
+          style={{ height: "600px", width: "auto" }} 
         />
       </div>
 
      
       <button
         onClick={() => navigate("/onboarding")}
-        aria-label="Start onboarding"
         style={{
           border: "none",
           padding: 0,
