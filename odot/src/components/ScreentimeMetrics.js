@@ -151,9 +151,4 @@ console.log(aiResp)
   )
 }
 
-
-
-
-
-
 export default ScreentimeMetrics;

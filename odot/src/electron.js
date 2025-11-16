@@ -241,7 +241,7 @@ ipcMain.handle("fetch-api", async (event, message) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      "model": "qwen/qwen3-32b",
+      "model": "gpt-5",
       "messages": [{ "role": "user", "content": message }]
     })
   });
