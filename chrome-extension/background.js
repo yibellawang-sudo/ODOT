@@ -91,12 +91,13 @@ function stopTracking() {
   // Only save if more than 5 seconds elapsed
   if (elapsedMinutes > 0.08) {
     if (!siteData[currentSite]) {
-      siteData[currentSite] = 0;
+      siteData[currentSite] = {time: 0,
+                                start: Date.now()}
     }
     
-    siteData[currentSite] += elapsedMinutes;
-    
-    const totalMinutes = siteData[currentSite].toFixed(2);
+    siteData[currentSite].time += elapsedMinutes;
+    console.log(siteData[currentSite].time)
+    const totalMinutes = (siteData[currentSite].time || 0).toFixed(2);
     console.log(`Saved ${elapsedMinutes.toFixed(2)}min on ${currentSite} (total: ${totalMinutes}min)`);
     
     // Save to server
@@ -151,10 +152,13 @@ setInterval(() => {
     const elapsedMinutes = (now - lastSaveTime) / 1000 / 60;
     
     if (elapsedMinutes > 0.08) {
-      if (!siteData[currentSite]) {
-        siteData[currentSite] = 0;
+      if (!siteData[currentSite] || typeof siteData[currentSite].time !== 'number') {
+        siteData[currentSite] = {
+          time: typeof siteData[currentSite] === 'number' ? siteData[currentSite] : (siteData[currentSite]?.time || 0),
+          start: siteData[currentSite]?.start || Date.now()
+        };
       }
-      siteData[currentSite] += elapsedMinutes;
+      siteData[currentSite].time += elapsedMinutes;
       lastSaveTime = now;
       
       saveDataToServer();
@@ -168,8 +172,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     // Return current tracking data
     sendResponse({
       sites: siteData,
-      total: Object.values(siteData).reduce((sum, time) => sum + time, 0),
-      currentSite: currentSite,
+      total: Object.values(siteData).reduce((sum, time) => sum + time, 0),      currentSite: currentSite,
       isTracking: isTracking
     });
     return true;

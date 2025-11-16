@@ -11,6 +11,7 @@ function formatTime(minutes) {
 function loadData() {
   chrome.runtime.sendMessage({ action: 'getData' }, (response) => {
     if (!response) {
+      console.log(response)
       document.getElementById('content').innerHTML = '<div class="empty">Error loading data</div>';
       return;
     }
@@ -43,7 +44,8 @@ function displayData(response) {
   
   // Show current site
   if (response.currentSite && response.isTracking) {
-    const currentTime = response.sites[response.currentSite] || 0;
+    const siteData = response.sites[response.currentSite];
+    const currentTime = typeof siteData === 'number' ? siteData : (siteData?.time || 0);
     html += `
       <div class="current-site">
         Currently on: <strong>${response.currentSite}</strong><br>
@@ -55,7 +57,12 @@ function displayData(response) {
   }
   
   // Show all sites
-  const sites = Object.entries(response.sites).sort((a, b) => b[1] - a[1]);
+  const sites = Object.entries(response.sites)
+    .map(([site, value]) => {
+      const time = typeof value === 'number' ? value : (value?.time || 0);
+      return [site, time];
+    })
+    .sort((a, b) => b[1] - a[1]);
   
   if (sites.length > 0) {
     html += '<div class="sites-header">All Sites</div>';
@@ -130,11 +137,13 @@ function showAnalysis(analysis, sites) {
   let playTime = 0;
   
   analysis.work.forEach(site => {
-    workTime += sites[site] || 0;
+    const siteData = sites[site];
+    workTime += typeof siteData === 'number' ? siteData : (siteData?.time || 0);
   });
   
   analysis.play.forEach(site => {
-    playTime += sites[site] || 0;
+    const siteData = sites[site];
+    playTime += typeof siteData === 'number' ? siteData : (siteData?.time || 0);
   });
   
   const total = workTime + playTime;
@@ -179,7 +188,8 @@ function showAnalysis(analysis, sites) {
   `;
   
   analysis.work.forEach(site => {
-    const time = sites[site] || 0;
+    const siteData = sites[site];
+    const time = typeof siteData === 'number' ? siteData : (siteData?.time || 0);
     html += `
       <div class="site" style="border-left: 3px solid #abff4f;">
         <span class="site-name">${site}</span>
@@ -196,7 +206,8 @@ function showAnalysis(analysis, sites) {
   `;
   
   analysis.play.forEach(site => {
-    const time = sites[site] || 0;
+    const siteData = sites[site];
+    const time = typeof siteData === 'number' ? siteData : (siteData?.time || 0);
     html += `
       <div class="site" style="border-left: 3px solid #555;">
         <span class="site-name">${site}</span>
