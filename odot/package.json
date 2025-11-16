@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "electron": "^39.2.0",
+    "electron-is-dev": "^3.0.1",
     "express": "^5.1.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
