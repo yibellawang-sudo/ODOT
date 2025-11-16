@@ -5,7 +5,6 @@ contextBridge.exposeInMainWorld('electronAPI', {
   readInFile: (type) => ipcRenderer.invoke('readInFile', type),
   getExtensionData: () => ipcRenderer.invoke('get-extension-data'),
   analyzeWithAI: (sites) => ipcRenderer.invoke('analyze-with-ai', sites),
-  fetchAPI: () => ipcRenderer.invoke('fetch-api'),
   
   getTrackerData: () => ipcRenderer.invoke('get-tracker-data'),
   onTrackerDataUpdated: (callback) => {
