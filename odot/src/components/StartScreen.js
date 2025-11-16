@@ -10,7 +10,7 @@ function StartScreen() {
     <div className="body">
       
       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "40px" }}>
-        <h1 style={{ margin: 0, fontSize: "50px", fontWeight: "bold" }}>
+        <h1 style={{ margin: 0, fontSize: "50px" }}>
           Welcome to
         </h1>
         <img 
