@@ -1,5 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import imgStats from "../images/screentimeusage.PNG";
+import imgNotes from "../images/notesandgoals.PNG";
+import imgTodos from "../images/todos.PNG";
+import imgArrow from "../images/arrow.PNG";
 import { useState, useEffect } from 'react';
 import './Onboarding.css';
 

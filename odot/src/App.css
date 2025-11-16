@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-color: #d4f5ba;
 }
 
 .App-logo {
@@ -70,7 +71,7 @@ cursor: pointer;
   justify-content: center;
   height: 7%;
   width: 40%;
-  background-color: #abff4f;
+  background-color: #beef9e;
   text-align: center;
   padding: 10px 20px;
   border: none;
@@ -85,14 +86,14 @@ cursor: pointer;
   justify-content: center;
   height: 25%;
   width: 70%;
-  background-color: #abff4f;
+  background-color: #A6C36F;
   text-align: center;
   border: none;
   border-radius: 5px;
 }
 
 .timeRow {
-  background-color: #abff4f;
+  background-color: #A6C36F;
   width: 80%;
   margin: 0 0 5% 0%;
   display: flex;
@@ -133,7 +134,7 @@ height: 100vh;
 .aiViewer {
   display: flex;
   flex-direction: column;
-  background-color:#abff4f;
+  background-color:#A6C36F;
   width: 50%;
 }
 
@@ -145,4 +146,48 @@ height: 100vh;
   to {
     transform: rotate(360deg);
   }
+}
+.onboard-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.navButton {
+  cursor: pointer;
+  font-size: 18px;
+  align-self: flex-start;
+}
+
+h2 {
+  margin-bottom: 40px;
+}
+
+.zigzag-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+
+
+.zigzag-item.left {
+  margin-left: 0; /* flush left */
+}
+
+.zigzag-item.right {
+  margin-left: 150px; /* offset from left item */
+}
+
+.zigzag-img {
+  width: 250px;
+  height: 200px;
+  border-radius: 0;
+}
+
+.zigzag-label {
+  margin-top: 0; /* smaller spacing */
 }
