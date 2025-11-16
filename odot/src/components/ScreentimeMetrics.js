@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function ScreentimeMetrics() {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
-
+const [view, setView] = useState('today')
   useEffect(() => {
     async function getData() {
       const result = await window.electronAPI.readInFile();
@@ -20,12 +20,17 @@ function ScreentimeMetrics() {
   }, []);
   return (
     <div className = "screentime-viewer">
+        <div className = "screentime-header">
       <p onClick={() => navigate(-1)} className="navButton">
         ←
       </p>
+      <p className = "left-header" >{view}</p>
+      </div>
+      <div className = "screentime-body">
       {data == null ? <p>loading...</p> : exportToday(data)}
       <div className = "aiViewer">
-
+        {AISummary()}
+      </div>
       </div>
     </div>
   );
@@ -36,15 +41,15 @@ function exportToday(data) {
   tomorrow.setDate(tomorrow.getDate() + 1);
     let totalSec = 0;
     for (const dataPt of data) {
-        console.log(dataPt)
+      
         totalSec += dataPt.seconds;
     }
-    console.log(totalSec)
+   
     let totalHrs = Math.floor(totalSec/3600)
     let totalMin = Math.floor((totalSec - (Math.floor(totalSec/3600)*3600))/60)
   return (
     <>
-      <h1>today</h1>
+     
       <div className = "timeRowDiv">
         <h2 className= "left-header">{totalHrs} hrs and {totalMin} min today</h2>
       {data
@@ -78,11 +83,6 @@ function exportRow(name, time, idx) {
     </div>
   );
 }
-  
-
-
-
-
 function AISummary() {
   const [fileInfo, setFileInfo] = useState(null);
   const [aiResp, setAIResp] = useState(null);
@@ -150,4 +150,10 @@ console.log(aiResp)
     </div>
   )
 }
+
+
+
+
+
+
 export default ScreentimeMetrics;
