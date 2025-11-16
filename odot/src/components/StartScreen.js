@@ -9,7 +9,7 @@ function StartScreen() {
   return (
     <div className="body">
       <h1 className="App-header">Welcome to</h1>
-      <img src={logoImg} alt="logo" />
+      <img src={logoImg} alt="logo" style={{display: "block", marginBottom: "20px"}} />
 
       <button
         onClick={() => navigate("/onboarding")}
@@ -20,13 +20,15 @@ function StartScreen() {
           margin: 0,
           background: "none",
           cursor: "pointer",
-          display: "block", // removes inline button spacing
+          display: "inline-block",
+          width: "300px",
+          height: "auto",
         }}
       >
         <img 
           src={startImg} 
           alt="Start onboarding" 
-          style={{ width: "300px", display: "block" }} 
+          style={{ width: "100%", display: "block" }} 
         />
       </button>
     </div>
