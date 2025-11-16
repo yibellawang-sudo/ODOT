@@ -25,6 +25,8 @@
 
 .left-header{
   text-align: left;
+  font-size: 30px;
+  padding: 0 0 2% 0;
 }
 
 .navButton {
@@ -103,8 +105,23 @@ cursor: pointer;
 display: flex;
 flex-direction: column;
 justify-content: left;
-align-items: flex-start;
-padding: 2%;
+align-items: center;
+padding: 0 2% 0 2%;
+height: 100vh;
+}
+
+.screentime-header {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+
+.screentime-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+  justify-content: center;
 }
 
 .timeRowDiv {
@@ -112,6 +129,14 @@ padding: 2%;
   flex-direction: column;
   width: 50%;
 }
+
+.aiViewer {
+  display: flex;
+  flex-direction: column;
+  background-color:#abff4f;
+  width: 50%;
+}
+
 
 @keyframes App-logo-spin {
   from {
