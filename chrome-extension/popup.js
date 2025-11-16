@@ -30,7 +30,7 @@ function displayData(response) {
   } else {
     statusEl.className = 'status inactive';
     statusEl.innerHTML = `
-      <div class="pulse" style="background: black;"></div>
+      <div class="pulse"></div>
       <span>Not tracking (no active tab)</span>
     `;
   }
@@ -81,7 +81,7 @@ function displayData(response) {
   }
   
   html += '<button id="reset">Reset All Data</button>';
-  html += '<button id="analyze" style="background: #888; margin-top: 8px;">Analyze with AI</button>';
+  html += '<button id="analyze">Analyze</button>';
   
   document.getElementById('content').innerHTML = html;
   
@@ -96,12 +96,12 @@ function displayData(response) {
   
   // Analyze button
   document.getElementById('analyze').addEventListener('click', () => {
-    analyzeWithAI(response.sites);
+    analyze(response.sites);
   });
 }
 
-// AI Analysis
-function analyzeWithAI(sites) {
+// Analysis
+function analyze(sites) {
   const analyzeBtn = document.getElementById('analyze');
   analyzeBtn.disabled = true;
   analyzeBtn.textContent = 'Analyzing...';
@@ -111,12 +111,12 @@ function analyzeWithAI(sites) {
     sites: sites
   }, (result) => {
     analyzeBtn.disabled = false;
-    analyzeBtn.textContent = 'Analyze with AI';
+    analyzeBtn.textContent = 'Analyze';
     
     if (result.success) {
       showAnalysis(result.analysis, sites);
     } else {
-      alert('AI Analysis failed: ' + result.error);
+      alert('Analysis failed: ' + result.error);
     }
   });
 }
@@ -143,21 +143,21 @@ function showAnalysis(analysis, sites) {
   
   let html = `
     <div style="text-align: center; margin-bottom: 20px;">
-      <div style="font-size: 24px; font-weight: bold; color: #888; margin-bottom: 8px;">
-        AI Analysis Complete! 
+      <div style="font-size: 20px; font-weight: bold; color: #abff4f; margin-bottom: 8px;">
+        Analysis Complete!
       </div>
     </div>
     
-    <div style="background: black; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
-      <div style="font-size: 14px; color: #888; margin-bottom: 12px;">Productivity Breakdown</div>
+    <div style="background: #1a1a1a; border: 1px solid #333; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+      <div style="font-size: 14px; color: #888; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 1px;">Productivity Breakdown</div>
       
       <div style="margin-bottom: 12px;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
-          <span>💼 Work</span>
-          <span style="color: #888; font-weight: bold;">${workPercent}%</span>
+          <span>Work</span>
+          <span style="color: #abff4f; font-weight: bold;">${workPercent}%</span>
         </div>
-        <div style="background: #black; height: 8px; border-radius: 4px; overflow: hidden;">
-          <div style="background: #888; height: 100%; width: ${workPercent}%;"></div>
+        <div style="background: #0a0a0a; border: 1px solid #333; height: 8px; border-radius: 4px; overflow: hidden;">
+          <div style="background: #abff4f; height: 100%; width: ${workPercent}%;"></div>
         </div>
         <div style="font-size: 12px; color: #888; margin-top: 4px;">${formatTime(workTime)}</div>
       </div>
@@ -167,8 +167,8 @@ function showAnalysis(analysis, sites) {
           <span>Play</span>
           <span style="color: white; font-weight: bold;">${playPercent}%</span>
         </div>
-        <div style="background: black; height: 8px; border-radius: 4px; overflow: hidden;">
-          <div style="background: white; height: 100%; width: ${playPercent}%;"></div>
+        <div style="background: #0a0a0a; border: 1px solid #333; height: 8px; border-radius: 4px; overflow: hidden;">
+          <div style="background: #555; height: 100%; width: ${playPercent}%;"></div>
         </div>
         <div style="font-size: 12px; color: #888; margin-top: 4px;">${formatTime(playTime)}</div>
       </div>
@@ -181,7 +181,7 @@ function showAnalysis(analysis, sites) {
   analysis.work.forEach(site => {
     const time = sites[site] || 0;
     html += `
-      <div class="site" style="border-left: 3px solid #888;">
+      <div class="site" style="border-left: 3px solid #abff4f;">
         <span class="site-name">${site}</span>
         <span class="site-time">${formatTime(time)}</span>
       </div>
@@ -198,7 +198,7 @@ function showAnalysis(analysis, sites) {
   analysis.play.forEach(site => {
     const time = sites[site] || 0;
     html += `
-      <div class="site" style="border-left: 3px solid #white;">
+      <div class="site" style="border-left: 3px solid #555;">
         <span class="site-name">${site}</span>
         <span class="site-time">${formatTime(time)}</span>
       </div>
@@ -207,7 +207,7 @@ function showAnalysis(analysis, sites) {
   
   html += `
     </div>
-    <button id="back" style="background: black; margin-top: 16px;">← Back to Overview</button>
+    <button id="back">← Back to Overview</button>
   `;
   
   contentEl.innerHTML = html;

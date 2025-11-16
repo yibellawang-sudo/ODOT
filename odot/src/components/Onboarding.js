@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 function Onboarding() {
   const navigate = useNavigate();
-  const options = [{name: "screentime usage", key: "ScreentimeMetrics"},
+  const options = [{name: "screentime usage", key: "dashboard"},
     {name: "notes & goals", key: "notesGoalsUI"}, {name: "todos", key: "todos"}];
 
   return (

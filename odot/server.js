@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const os = require('os');
 
-const PORT = 3000;
+const PORT = 3737;
 const DATA_FILE = path.join(os.homedir(), '.odot-tracker-data.json');
 const LOG_FILE = path.join(os.homedir(), '.odot-server.log');
 

@@ -11,7 +11,7 @@ function StartScreen() {
       <h1 className = "App-header">odot</h1>
       <button
         className = "button"
-        onClick={() => navigate("/onboarding")}>
+        onClick={() => navigate("./onboarding")}>
         start!
       </button>
     </div>

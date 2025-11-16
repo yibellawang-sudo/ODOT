@@ -45,7 +45,7 @@ function createNativeFile() {
   if (!fs.existsSync(nativePath)) {
     const jsFile = {
       "name": "com.hackclub.odot",
-      "description": "Odot",
+      "description": "ODOT",
       "path": __dirname,
       "type": "stdio",
       "allowed_origins": ["chrome-extension://knldjmfmopnpolahpmmgbagdohdnhkik/"]
@@ -60,7 +60,7 @@ function readTrackerData() {
     if (fs.existsSync(DATA_FILE)) {
       const content = fs.readFileSync(DATA_FILE, 'utf8');
       const parsed = JSON.parse(content);
-      console.log('✓ Loaded tracker data:', Object.keys(parsed).length, 'activities');
+      console.log('Loaded tracker data:', Object.keys(parsed).length, 'activities');
       return parsed;
     }
     return {};

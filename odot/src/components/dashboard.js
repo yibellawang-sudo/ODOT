@@ -19,8 +19,19 @@ function Dashboard() {
 
     async function loadData() {
         try {
-            const result = await window.electronAPI.getExtensionData();
-            setData(result);
+            if (window.electronAPI) {
+                // Running in Electron - use IPC
+                const result = await window.electronAPI.getExtensionData();
+                setData(result);
+            } else {
+                // Fallback for browser testing
+                const response = await fetch('http://localhost:3737/data');
+                const result = await response.json();
+                setData({
+                    sites: result.data || {},
+                    total: Object.values(result.data || {}).reduce((sum, time) => sum + time, 0),
+                });
+            }
             setError(null);
             setLoading(false);
         } catch (err) {
@@ -33,17 +44,33 @@ function Dashboard() {
         if (!data?.sites) return;
         
         try {
-            const result = await window.electronAPI.analyzeWithAI(data.sites);
-            if (result.success) {
-                setAnalysis(result.analysis);
+            if (window.electronAPI) {
+                const result = await window.electronAPI.analyzeWithAI(data.sites);
+                if (result.success) {
+                    setAnalysis(result.analysis);
+                } else {
+                    alert('Analysis failed: ' + result.error);
+                }
             } else {
-                alert('Analysis failed: ' + result.error);
+                // Browser fallback with simple classification
+                const work = [], play = [];
+                const workKeywords = ['github', 'stackoverflow', 'docs', 'gmail', 'notion', 'slack'];
+                const playKeywords = ['youtube', 'reddit', 'twitter', 'instagram', 'discord', 'netflix'];
+                
+                Object.keys(data.sites).forEach(site => {
+                    const siteLower = site.toLowerCase();
+                    if (workKeywords.some(k => siteLower.includes(k))) work.push(site);
+                    else if (playKeywords.some(k => siteLower.includes(k))) play.push(site);
+                    else play.push(site);
+                });
+                
+                setAnalysis({ work, play });
             }
         } catch (err) {
             alert('Analysis failed: ' + err.message);
         }
     }
-
+    
     function formatTime(minutes) {
         const h = Math.floor(minutes / 60);
         const m = Math.floor(minutes % 60);
