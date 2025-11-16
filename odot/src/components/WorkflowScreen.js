@@ -1,17 +1,18 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Dashboard from "./dashboard";
 
 function WorkflowScreen() {
   const { option } = useParams();
-  const navigate = useNavigate();
+
+  if (option === "screentime usage") {
+    return <Dashboard />;
+  }
 
   return (
     <div className="body">
-      <h1>{option}</h1>
-      <p>This is the workflow screen for {option}.</p>
-      <button onClick={() => navigate("/onboarding")} style={{ marginTop: "20px" }}>
-        Back to Onboarding
-      </button>
+      <h2>{option}</h2>
+      <p>Coming soon...</p>
     </div>
   );
 }

@@ -11,7 +11,6 @@
     "axios": "^1.13.2",
     "dotenv": "^17.2.3",
     "electron": "^39.2.0",
-    "electron-is-dev": "^3.0.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^6.30.2",
@@ -22,6 +21,7 @@
     "start": "electron .",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "react-start": "react-scripts start",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
