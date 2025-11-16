@@ -48,12 +48,13 @@ function createNativeFile() {
   }
   
   if (!fs.existsSync(nativePath)) {
+    const extensionKey = process.env.EXT_KEY
     const jsFile = {
       "name": "com.hackclub.odot",
       "description": "ODOT",
       "path": __dirname,
       "type": "stdio",
-      "allowed_origins": ["chrome-extension://knldjmfmopnpolahpmmgbagdohdnhkik/"]
+      "allowed_origins": [`chrome-extension://${extensionKey}/`]
     };
     fs.writeFileSync(nativePath, JSON.stringify(jsFile, null, 2));
     console.log('Created native messaging manifest at:', nativePath);
