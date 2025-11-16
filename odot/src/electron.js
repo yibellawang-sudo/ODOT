@@ -244,9 +244,8 @@ function fallbackClassification(sites) {
   };
 }
 
-ipcMain.handle("fetch-api", async (event) => {
-  const apiKey = process.env.API_KEY;
-
+ipcMain.handle("fetch-api", async (event, message) => {
+  const apiKey = process.env.API_KEY
   const res = await fetch("https://ai.hackclub.com/proxy/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -255,9 +254,22 @@ ipcMain.handle("fetch-api", async (event) => {
     },
     body: JSON.stringify({
       "model": "qwen/qwen3-32b",
-      "messages": [{ "role": "user", "content": "hello" }]
+      "messages": [{ "role": "user", "content": message }]
     })
   });
 
   return res.json();
 });
+
+
+ipcMain.handle("readInFile", async (event, type) => {
+  let filepath;
+  if (type == 'userinfo') {
+    filepath = path.join(__dirname, "../userInfo.json")
+  } else {
+     filepath = path.join(__dirname, "../data.json");
+  }
+ const data = fs.readFileSync(filepath)
+ 
+return data
+})

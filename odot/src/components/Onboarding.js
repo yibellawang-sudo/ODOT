@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 function Onboarding() {
   const navigate = useNavigate();
-  const options = ["screentime usage", "notes & goals", "todos"];
+  const options = [{name: "screentime usage", key: "ScreentimeMetrics"},
+    {name: "notes & goals", key: "notesGoalsUI"}, {name: "todos", key: "todos"}];
 
   return (
     <div className="onboard-body">
@@ -13,13 +14,14 @@ function Onboarding() {
       
         <h2>odot</h2>
         <div className="buttonDiv">
+          
         {options.map((opt) => (
           <button
-            key={opt}
+            key={opt.key}
             className = "large-button"
-            onClick={() => navigate(`/workflow/${opt}`)}
+            onClick={() => navigate(`/${opt.key}`)}
           >
-            {opt}
+            {opt.name}
           </button>
         ))}
         </div>

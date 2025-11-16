@@ -35,6 +35,12 @@ body {
   color: #61dafb;
 }
 
+.left-header{
+  text-align: left;
+  font-size: 30px;
+  padding: 0 0 2% 0;
+}
+
 .navButton {
   cursor: pointer;
 }
@@ -71,7 +77,7 @@ body {
   justify-content: center;
   height: 7%;
   width: 40%;
-  background-color: #abff4f;
+  background-color: #beef9e;
   text-align: center;
   padding: 10px 20px;
   border: none;
@@ -90,6 +96,53 @@ body {
   border: none;
   border-radius: 5px;
 }
+
+.timeRow {
+  background-color: #abff4f;
+  width: 80%;
+  margin: 0 0 5% 0%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 5px;
+}
+
+.screentime-viewer {
+display: flex;
+flex-direction: column;
+justify-content: left;
+align-items: center;
+padding: 0 2% 0 2%;
+height: 100vh;
+}
+
+.screentime-header {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}
+
+.screentime-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  
+  justify-content: center;
+}
+
+.timeRowDiv {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.aiViewer {
+  display: flex;
+  flex-direction: column;
+  background-color:#A6C36F;
+  width: 50%;
+}
+
 
 @keyframes App-logo-spin {
   from {
