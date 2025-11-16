@@ -10,11 +10,17 @@ function StartScreen() {
     <div className="body">
       
       <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "40px" }}>
-        <h1 style={{ margin: 0, fontSize: "50px", fontWeight: "bold" }}>Welcome to</h1>
-        <img src={logoImg} alt="odot logo" style={{ height: "60px", width: "auto" }} />
+        <h1 style={{ margin: 0, fontSize: "50px", fontWeight: "bold" }}>
+          Welcome to
+        </h1>
+        <img 
+          src={logoImg} 
+          alt="odot logo" 
+          style={{ height: "60px", width: "auto" }} 
+        />
       </div>
 
-      
+     
       <button
         onClick={() => navigate("/onboarding")}
         aria-label="Start onboarding"
@@ -25,10 +31,15 @@ function StartScreen() {
           background: "none",
           cursor: "pointer",
           display: "inline-block",
-          width: "600px", 
+          width: "300px",
+          height: "auto",
         }}
       >
-        <img src={startImg} alt="Start onboarding" style={{ width: "100%", display: "block" }} />
+        <img 
+          src={startImg} 
+          alt="Start onboarding" 
+          style={{ width: "100%", display: "block" }} 
+        />
       </button>
     </div>
   );
