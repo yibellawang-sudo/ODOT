@@ -83,5 +83,71 @@ function exportRow(name, time, idx) {
 
 
 
+function AISummary() {
+  const [fileInfo, setFileInfo] = useState(null);
+  const [aiResp, setAIResp] = useState(null);
+    const [loading, setLoading] = useState(true);
 
+
+  // 1. Load user info file
+  useEffect(() => {
+    async function getData() {
+      const result = await window.electronAPI.readInFile("userinfo");
+      const decoder = new TextDecoder("utf-8");
+      const jsonString = decoder.decode(result);
+      const jsonObject = JSON.parse(jsonString);
+      setFileInfo(jsonObject);
+    }
+    getData();
+  }, []);
+
+  // Don't proceed until fileInfo is loaded
+ useEffect(() => {
+    if (!fileInfo) return;   // ✔ This is allowed! Hook still runs every render.
+
+    async function getAI() {
+      const msg = `
+You are analyzing a user's daily screentime behavior.
+
+Traits: ${fileInfo.general.traits.join(", ")}
+Goals: ${fileInfo.general.goals.join(", ")}
+Observations: ${fileInfo.observations}
+
+Journal entries:
+${fileInfo.journal
+  .map((entry) => `- On UNIX time ${entry.date}, they said: "${entry.summary}"`)
+  .join("\n")}
+
+Respond ONLY in pure JSON with this structure:
+
+{
+  "ai_score": string ("3/10),
+  "goals_met": string,
+  "goals_betrayed": string,
+  "commentary": string,
+}
+`
+
+      const result = await window.electronAPI.fetchAPI(msg);
+      setAIResp(JSON.parse(result.choices[0].message.content))
+      
+      setLoading(false);
+    }
+
+    getAI();
+  }, [fileInfo]); // runs ONLY when fileInfo changes (once)
+
+  if (loading) return <div>loading ai summary...</div>;
+console.log(aiResp)
+  return (
+    <div className = "aiRespBody">
+        <h3 className = "smallHeader">ai score: {aiResp.ai_score}</h3>
+        <div className = "smallAIRespBody">
+            <p>goals met: {aiResp.goals_met}</p>
+            <p>goals betrayed: {aiResp.goals_betrayed}</p>
+            <p>{aiResp.commentary}</p>
+        </div>
+    </div>
+  )
+}
 export default ScreentimeMetrics;
