@@ -78,8 +78,7 @@ function exportRow(name, time, idx) {
     </div>
   );
 }
-
-function  
+  
 
 
 

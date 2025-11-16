@@ -70,7 +70,7 @@ cursor: pointer;
   justify-content: center;
   height: 7%;
   width: 40%;
-  background-color: #abff4f;
+  background-color: #beef9e;
   text-align: center;
   padding: 10px 20px;
   border: none;
@@ -133,7 +133,7 @@ height: 100vh;
 .aiViewer {
   display: flex;
   flex-direction: column;
-  background-color:#abff4f;
+  background-color:#A6C36F;
   width: 50%;
 }
 
