@@ -83,7 +83,6 @@ User Profile:
 
 Generate 7 short-term goals (this week/month) and 4 long term goals (this year+) that would be relevant for this person.
 Make them specific, actionable, and personalized to their work style and patterns.
-
 Respond ONLY with valid JSON:
 { 
   "short": ["goal 1", "goal 2", "goal 3", "goal 4", "goal 5", "goal 6", "goal 7"],
@@ -169,47 +168,36 @@ Respond ONLY with valid JSON:
     
     console.log('Starting timetable generation with data:', formData);
     
-    const prompt = `
-You are an AI scheduling assistant. Generate a smart daily timetable based on this user profile:
-Name: ${formData.name}
-Role: ${formData.role}
-Sleep Schedule: Wake up at ${formData.sleepSchedule.wakeTime}, sleeps at ${formData.sleepSchedule.bedTime}
-Work Style: ${formData.workStyle.join(', ')}
-Energy Peaks: ${formData.energyPeaks.join(', ')}
-Break Frequency: Every ${formData.preferences.breakFrequency} minutes
-Focus Session Length: ${formData.preferences.focusSessionLength} minutes
-Exercise Preference: ${formData.preferences.exerciseTime || 'Not specified'}
-Short-Term Goals: ${formData.shortTermGoals.join(', ')}
-Long-Term Goals: ${formData.longTermGoals.join(', ')}
+    const prompt = `Generate a daily schedule in JSON format.
 
-Their tasks today are:
+Profile: ${formData.name}, ${formData.role}
+Wake: ${formData.sleepSchedule.wakeTime} | Sleep: ${formData.sleepSchedule.bedTime}
+Work style: ${formData.workStyle.join(', ')}
+Peak energy: ${formData.energyPeaks.slice(0, 2).join(', ')}
+Focus sessions: ${formData.preferences.focusSessionLength}min
+Breaks: every ${formData.preferences.breakFrequency}min
+Exercise: ${formData.preferences.exerciseTime || 'none'}
+
+Tasks:
 ${formData.dailyTodos.map((todo, i) => `${i + 1}. ${todo.text}`).join('\n')}
 
-Create an optimized schedule that places demanding tasks during peak energy times, includes strategic breaks, respects
-their work style, allocates a reasonable and explainable amount of time for each todo item, includes buffer time and transitions 
-and adds exercise/movement if preferred by the user or stated as one of their goals.
-
-Respond ONLY with valid JSON in this exact format:
+Create schedule with: morning routine, tasks during peak energy, breaks, exercise if specified, evening wind-down. Return JSON only:
 {
-  "schedule": [
-    {
-      "time": "07:00",
-      "duration": 30,
-      "activity": "Morning Routine",
-      "type": "personal",
-      "reason": "Start day with calm preparation"
-    }
-  ],
-  "insights": {
-    "productivity_score": "8/10",
-    "schedule_philosophy": "Your most important work is scheduled during your peak energy hours",
-    "tips": ["Tip 1", "Tip 2"]
-  }
+  "schedule": [{"time": "07:00", "duration": 30, "activity": "Morning Routine", "type": "personal", "reason": "Start fresh"}],
+  "insights": {"productivity_score": "8/10", "schedule_philosophy": "Peak energy optimization", "tips": ["Tip 1", "Tip 2"]}
 }`;
 
     try {
       console.log('Sending API request...');
-      const result = await window.electronAPI.fetchAPI(prompt);
+      
+      // Add timeout for better UX
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Request timeout - taking too long')), 30000)
+      );
+      
+      const apiPromise = window.electronAPI.fetchAPI(prompt);
+      const result = await Promise.race([apiPromise, timeoutPromise]);
+      
       console.log('API Response:', result);
       
       // Handle the response - it might be structured differently
@@ -232,8 +220,15 @@ Respond ONLY with valid JSON in this exact format:
       };
 
       console.log('Saving user data:', userData);
+      
       //save to file
-      await window.electronAPI.saveUserData(userData);
+      if (window.electronAPI?.saveUserData) {
+        await window.electronAPI.saveUserData(userData);
+      } else {
+        // Fallback: save to localStorage if Electron API not available
+        console.warn('Electron API not available, using localStorage');
+        localStorage.setItem('userData', JSON.stringify(userData));
+      }
       
       console.log('Navigating to timetable...');
       navigate('/timetable', { state: { timetable: aiResponse } });
