@@ -89,7 +89,7 @@ function AISummary() {
     const [loading, setLoading] = useState(true);
 
 
-  // 1. Load user info file
+ 
   useEffect(() => {
     async function getData() {
       const result = await window.electronAPI.readInFile("userinfo");
@@ -101,9 +101,8 @@ function AISummary() {
     getData();
   }, []);
 
-  // Don't proceed until fileInfo is loaded
  useEffect(() => {
-    if (!fileInfo) return;   // ✔ This is allowed! Hook still runs every render.
+    if (!fileInfo) return;   
 
     async function getAI() {
       const msg = `
