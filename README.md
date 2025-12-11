@@ -162,6 +162,3 @@ API_KEY=your_api_key_here
 
 MIT
 
----
-
-Built at [Hack Club](https://hackclub.com) Parthenon!
